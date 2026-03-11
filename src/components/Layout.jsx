@@ -2,15 +2,13 @@ import React from 'react';
 import Navbar from './Navbar.jsx';
 import { Outlet } from 'react-router-dom';
 
-function Layout() {
+export default function Layout({ onLogout }) {
   return (
     <div>
-      <Navbar />
-      <main>
+      <Navbar onLogout={onLogout} />
+      <main style={{ padding: '20px' }}>
         <Outlet />
       </main>
-    </div>
+      </div>
   );
-}
-
-export default Layout;
+} 

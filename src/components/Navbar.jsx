@@ -1,8 +1,9 @@
 import { NavLink } from 'react-router-dom'
 import icone from '../assets/icone_1.png'
 
-export default function Navbar() {
+export default function Navbar({ onLogout }) {
   return (
+    <nav>
     <header className="navbar">
       <div className="navbar-inner">
         <NavLink to="/" className="nav-brand" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none' }}>
@@ -36,6 +37,11 @@ export default function Navbar() {
           </NavLink>
         </nav>
       </div>
+      <button onClick={onLogout} style={{ backgroundColor: '#e53e3e', color: 'white', border: 'none', padding: '8px 16px', cursor: 'pointer', borderRadius: 4 }}>
+        Sair
+      </button>
     </header>
+    </nav>
   )
 }
+  
