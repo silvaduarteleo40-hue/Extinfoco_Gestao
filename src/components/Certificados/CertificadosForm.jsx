@@ -74,7 +74,7 @@ export default function CertificadosForm() {
   function handleGerarPDF() {
     const clienteNome = clientes.find(c => c.id === fields['Cliente'][0])?.fields['Nome'] || fields['Cliente'][0] || '-'
     const equipamentoNome = equipamentos.find(e => e.id === fields['Equipamento'][0])?.fields['Nome'] || equipamentos.find(e => e.id === fields['Equipamento'][0])?.fields['Tipo'] || fields['Equipamento'][0] || '-'
-    gerarCertificadoPDF({ fields, clienteNome, equipamentoNome })
+   gerarCertificadoPDF({ fields, clienteNome, equipamentoNome })
   }
 
   async function handleSubmit(e) {

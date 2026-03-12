@@ -268,3 +268,83 @@ button {
   font-size: 32px;
   font-weight: 700;
 }
+/* ── FORM BASE ──────────────────────────────────────────────── */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  font-weight: 600;
+  font-size: 14px;
+  color: #111827;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1.5px solid #d1d5db;
+  border-radius: 10px;
+  font-size: 14px;
+  background: #ffffff;
+  color: #111827;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-control:focus {
+  border-color: #dc2626;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15);
+}
+
+.form-control::placeholder {
+  color: #9ca3af;
+}
+
+/* ── FORM GRID (2 colunas) ──────────────────────────────────── */
+.form-layout {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.form-layout .full {
+  grid-column: span 2;
+}
+
+.form-actions {
+  grid-column: span 2;
+  padding-top: 8px;
+}
+
+@media (max-width: 640px) {
+  .form-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .form-layout .full,
+  .form-actions {
+    grid-column: span 1;
+  }
+}
+
+/* ── ALERTS ─────────────────────────────────────────────────── */
+.alert-success {
+  background: #d1fae5;
+  color: #065f46;
+  padding: 12px 16px;
+  border-radius: 10px;
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
+.alert-error {
+  background: #fee2e2;
+  color: #991b1b;
+  padding: 12px 16px;
+  border-radius: 10px;
+  margin-bottom: 16px;
+  font-weight: 600;
+}

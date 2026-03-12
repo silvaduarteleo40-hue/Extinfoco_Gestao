@@ -1,144 +1,156 @@
-import jsPDF from 'jspdf'
-import { getEmpresaData } from '../components/Configuracoes'
-import logoImg from '../assets/icone_1.png'
+import jsPDF from "jspdf"
+import { getEmpresaData } from "../components/Configuracoes"
+import logoImg from "../assets/icone_1.png"
 
-/**
- * Generates and downloads a certificate PDF.
- * @param {object} params
- * @param {object} params.fields - Certificate fields from Airtable
- * @param {string} params.clienteNome - Resolved client name
- * @param {string} params.equipamentoNome - Resolved equipment name
- */
 export function gerarCertificadoPDF({ fields, clienteNome, equipamentoNome }) {
-  const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' })
+  const doc = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4" })
   const empresa = getEmpresaData()
 
   const pageW = doc.internal.pageSize.getWidth()
+  const pageH = doc.internal.pageSize.getHeight()
   const margin = 20
 
-  // ── Header background ────────────────────────────────────────────────────────
+  // Header vermelho
   doc.setFillColor(220, 38, 38)
-  doc.rect(0, 0, pageW, 36, 'F')
+  doc.rect(0, 0, pageW, 36, "F")
 
-  // ── Logo (top-left) ──────────────────────────────────────────────────────────
-  doc.addImage(logoImg, 'PNG', 0, -7.5, 42, 42)
+  // Logo
+  try {
+    doc.addImage(logoImg, "PNG", 0, -7.5, 42, 42)
+  } catch {}
 
-  // ── App name next to logo ────────────────────────────────────────────────────
+  // Nome do app
   doc.setTextColor(255, 255, 255)
   doc.setFontSize(16)
-  doc.setFont('helvetica', 'bold')
-  doc.text('EXTINFOCO', 38, 14)
-  doc.setFontSize(8)
-  doc.setFont('helvetica', 'normal')
-  doc.text('Gestão de Extintores e Segurança', 38, 20)
+  doc.setFont("helvetica", "bold")
+  doc.text("EXTINFOCO", 38, 14)
 
-  // ── Company data (top-right) ─────────────────────────────────────────────────
   doc.setFontSize(8)
-  doc.setFont('helvetica', 'bold')
-  doc.setTextColor(255, 255, 255)
+  doc.setFont("helvetica", "normal")
+  doc.text("Gestão de Extintores e Segurança", 38, 20)
+
+  // Dados da empresa
+  doc.setFontSize(8)
   const companyLines = []
+
   if (empresa.nome) companyLines.push(empresa.nome)
   if (empresa.cnpj) companyLines.push(`CNPJ: ${empresa.cnpj}`)
   if (empresa.endereco) companyLines.push(empresa.endereco)
-  if (empresa.cidade || empresa.estado) companyLines.push([empresa.cidade, empresa.estado].filter(Boolean).join(' - '))
+
+  if (empresa.cidade || empresa.estado) {
+    companyLines.push(
+      [empresa.cidade, empresa.estado].filter(Boolean).join(" - ")
+    )
+  }
+
   if (empresa.telefone) companyLines.push(`Tel: ${empresa.telefone}`)
   if (empresa.email) companyLines.push(empresa.email)
 
   let compY = 8
-  doc.setFont('helvetica', 'normal')
+
   for (const line of companyLines) {
-    doc.text(line, pageW - margin, compY, { align: 'right' })
+    doc.text(line, pageW - margin, compY, { align: "right" })
     compY += 4.5
   }
 
-  // ── Certificate title ────────────────────────────────────────────────────────
+  // Título
   doc.setTextColor(0, 0, 0)
   doc.setFontSize(14)
-  doc.setFont('helvetica', 'bold')
-  doc.text('CERTIFICADO DE SERVIÇO', pageW / 2, 46, { align: 'center' })
+  doc.setFont("helvetica", "bold")
+  doc.text("CERTIFICADO DE SERVIÇO", pageW / 2, 46, { align: "center" })
 
-  // ── Certificate number ───────────────────────────────────────────────────────
-  const numCert = fields['Número do Certificado'] || '-'
+  // Número
+  const numCert = fields["Número do Certificado"] || "-"
   doc.setFontSize(11)
-  doc.text(`Nº: ${numCert}`, pageW / 2, 53, { align: 'center' })
+  doc.text(`Nº: ${numCert}`, pageW / 2, 53, { align: "center" })
 
-  // ── Divider ──────────────────────────────────────────────────────────────────
+  // Linha
   doc.setDrawColor(220, 38, 38)
   doc.setLineWidth(0.5)
   doc.line(margin, 57, pageW - margin, 57)
 
-  // ── Data rows ────────────────────────────────────────────────────────────────
+  // Dados
   const rows = [
-    ['Cliente', clienteNome || '-'],
-    ['Equipamento', equipamentoNome || '-'],
-    ['Tipo de Serviço', fields['Tipo de Serviço'] || '-'],
-    ['Data de Emissão', formatDateBR(fields['Data de Emissão'])],
-    ['Data de Validade', formatDateBR(fields['Data de Validade'])],
+    ["Cliente", clienteNome || "-"],
+    ["Equipamento", equipamentoNome || "-"],
+    ["Tipo de Serviço", fields["Tipo de Serviço"] || "-"],
+    ["Data de Emissão", formatDateBR(fields["Data de Emissão"])],
+    ["Data de Validade", formatDateBR(fields["Data de Validade"])]
   ]
 
   let y = 67
-  doc.setFontSize(11)
 
   rows.forEach(([label, value]) => {
-    doc.setFont('helvetica', 'bold')
+    doc.setFont("helvetica", "bold")
     doc.setTextColor(80, 80, 80)
     doc.text(`${label}:`, margin, y)
 
-    doc.setFont('helvetica', 'normal')
+    doc.setFont("helvetica", "normal")
     doc.setTextColor(0, 0, 0)
-    doc.text(value, margin + 50, y)
+    doc.text(String(value), margin + 50, y)
 
     y += 10
   })
 
-  // ── Observations ─────────────────────────────────────────────────────────────
-  if (fields['Observações']) {
+  // Observações
+  if (fields["Observações"]) {
     y += 4
-    doc.setFont('helvetica', 'bold')
+    doc.setFont("helvetica", "bold")
     doc.setTextColor(80, 80, 80)
-    doc.text('Observações:', margin, y)
+    doc.text("Observações:", margin, y)
     y += 7
 
-    doc.setFont('helvetica', 'normal')
-    doc.setTextColor(0, 0, 0)
-    const lines = doc.splitTextToSize(fields['Observações'], pageW - margin * 2)
+    doc.setFont("helvetica", "normal")
+    const lines = doc.splitTextToSize(
+      fields["Observações"],
+      pageW - margin * 2
+    )
     doc.text(lines, margin, y)
     y += lines.length * 6
   }
 
-  // ── Signature area ────────────────────────────────────────────────────────────
+  // Assinaturas
   y = Math.max(y + 20, 210)
+
   doc.setDrawColor(0, 0, 0)
   doc.setLineWidth(0.3)
+
   doc.line(margin, y, margin + 70, y)
   doc.setFontSize(9)
   doc.setTextColor(80, 80, 80)
-  doc.text('Assinatura do Responsável', margin, y + 5)
+  doc.text("Assinatura do Responsável", margin, y + 5)
 
   doc.line(pageW - margin - 70, y, pageW - margin, y)
-  doc.text('Assinatura do Cliente', pageW - margin - 70, y + 5)
+  doc.text("Assinatura do Cliente", pageW - margin - 70, y + 5)
 
-  // ── Footer ────────────────────────────────────────────────────────────────────
-  const pageH = doc.internal.pageSize.getHeight()
+  // Footer
   doc.setFillColor(240, 240, 240)
-  doc.rect(0, pageH - 14, pageW, 14, 'F')
+  doc.rect(0, pageH - 14, pageW, 14, "F")
+
   doc.setFontSize(8)
   doc.setTextColor(120, 120, 120)
+
   doc.text(
-    `Emitido em ${new Date().toLocaleDateString('pt-BR')} — EXTINFOCO`,
+    `Emitido em ${new Date().toLocaleDateString("pt-BR")} — EXTINFOCO`,
     pageW / 2,
     pageH - 5,
-    { align: 'center' }
+    { align: "center" }
   )
 
-  // ── Save ──────────────────────────────────────────────────────────────────────
-  const filename = `certificado_${numCert.replace(/[^a-zA-Z0-9]/g, '_')}.pdf`
+  const filename = `certificado_${String(numCert).replace(
+    /[^a-zA-Z0-9]/g,
+    "_"
+  )}.pdf`
+
   doc.save(filename)
 }
 
 function formatDateBR(dateStr) {
-  if (!dateStr) return '-'
-  const [year, month, day] = dateStr.split('-')
-  if (!year || !month || !day) return dateStr
+  if (!dateStr) return "-"
+
+  const parts = String(dateStr).split("-")
+  if (parts.length !== 3) return dateStr
+
+  const [year, month, day] = parts
   return `${day}/${month}/${year}`
 }
