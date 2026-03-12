@@ -1,0 +1,18 @@
+﻿Nome,CNPJ/CPF,Email,Telefone,Endereço,Cidade,Estado,CEP,Observações,Equipamentos,Ordens de Serviço,Certificados
+João da Silva,123.456.789-09,joao.silva@email.com,+55 11 91234-5678,"Rua das Flores, 123",São Paulo,SP,01234-567,Cliente desde 2020. Prefere contato por email.,Extintor de Incêndio CO2,OS-2024-001,CERT-2024-001
+Maria Oliveira,987.654.321-00,maria.oliveira@email.com,+55 21 99876-5432,"Av. Atlântica, 456",Rio de Janeiro,RJ,22041-001,Solicitou orçamento em março.,Gerador Diesel,OS-2024-002,CERT-2024-002
+Empresa ABC Ltda,12.345.678/0001-99,contato@abc.com.br,+55 31 3344-5566,"Rua Minas Gerais, 789",Belo Horizonte,MG,30130-140,Cliente corporativo.,Mangueira de Incêndio,OS-2024-003,CERT-2024-003
+Carlos Pereira,321.654.987-11,carlos.pereira@email.com,+55 41 98877-6655,"Rua XV de Novembro, 101",Curitiba,PR,80020-310,Prefere contato por telefone.,Detector de Fumaça,OS-2024-004,CERT-2024-004
+Fernanda Souza,654.321.987-22,fernanda.souza@email.com,+55 51 97766-5544,"Av. Ipiranga, 2020",Porto Alegre,RS,90160-093,Cliente VIP.,Extintor de Pó Químico,OS-2024-005,CERT-2024-005
+Lucas Almeida,789.123.456-33,lucas.almeida@email.com,+55 71 98888-1122,"Rua Chile, 333",Salvador,BA,40020-000,Aguardando resposta de orçamento.,Alarme de Incêndio,OS-2024-006,CERT-2024-006
+Patrícia Gomes,456.789.123-44,patricia.gomes@email.com,+55 62 99999-8877,"Av. Goiás, 1500",Goiânia,GO,74063-010,Indicada por outro cliente.,Sprinkler Automático,OS-2024-007,CERT-2024-007
+Empresa XYZ ME,98.765.432/0001-55,contato@xyzme.com.br,+55 19 3345-6677,"Rua das Palmeiras, 88",Campinas,SP,13026-240,Cliente recorrente.,Extintor de Água Pressurizada,OS-2024-008,CERT-2024-008
+Roberto Lima,852.963.741-55,roberto.lima@email.com,+55 81 98877-6655,"Av. Boa Viagem, 500",Recife,PE,51011-000,Solicitou visita técnica.,Painel de Alarme,OS-2024-009,CERT-2024-009
+Juliana Martins,963.852.741-66,juliana.martins@email.com,+55 85 97777-6655,"Rua dos Tabajaras, 200",Fortaleza,CE,60060-510,Cliente novo.,"Extintor de Espuma,Extintor de Incêndio CO2,Extintor de Incêndio CO2,Extintor de Incêndio CO2","OS-2024-010,OS-2026-002",CERT-2024-010
+Cláudia Torres,741.852.963-77,claudia.torres@email.com,+55 27 98888-7766,"Av. Vitória, 300",Vitória,ES,29017-023,Prefere contato à tarde.,Luminária de Emergência,OS-2024-011,CERT-2024-011
+Empresa Beta S.A.,23.456.789/0001-88,contato@betasa.com.br,+55 48 3344-5566,"Rua Hercílio Luz, 400",Florianópolis,SC,88020-001,Cliente de grande porte.,,OS-2024-012,CERT-2024-012
+Eduardo Ramos,159.753.486-88,eduardo.ramos@email.com,+55 92 98888-7766,"Av. Djalma Batista, 1000",Manaus,AM,69050-010,Solicitou parcelamento.,Central de Alarme,OS-2024-013,CERT-2024-013
+Vanessa Castro,357.159.486-99,vanessa.castro@email.com,+55 98 97777-6655,"Rua Grande, 1234",São Luís,MA,65020-000,Cliente fiel desde 2018.,Extintor de Pó Químico,OS-2024-014,CERT-2024-014
+Empresa Gama Ltda,34.567.890/0001-22,contato@gamaltda.com.br,+55 62 3344-5566,"Av. T-63, 2500",Goiânia,GO,74230-200,Solicitou contrato anual.,Detector de Calor,OS-2024-015,CERT-2024-015
+LEONARDO DUARTE,29407655881,leonduartsilva@hotmail.com,19986051683,"Rua Doná Achilina Fachini, 552",Araras,SP,13607-010,cliente novo,,OS-2026-001,
+LEONARDO DUARTE,963.852.741-66,leonduartsilva@hotmail.com,19986051683,"Rua Doná Achilina Fachini, 552",Araras,SP,13607-010,teste,,,
